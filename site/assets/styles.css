@@ -66,7 +66,7 @@ a { color: inherit; }
 .btn-quiet { min-height: 42px; padding: 0 18px; background: transparent; color: var(--mist); box-shadow: inset 0 0 0 1px var(--line); font-size: .9375rem; }
 .btn-quiet:hover { background: rgba(169, 232, 207, .08); box-shadow: inset 0 0 0 1px rgba(169, 232, 207, .4); }
 
-/* Primary buttons: on hover a slim, semi-transparent jade line circles the button. */
+/* Primary buttons: on hover a slim, semi-transparent jade line makes one full lap of the button, then fades. */
 @property --orbit { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 .btn:not(.btn-quiet) { position: relative; isolation: isolate; }
 .btn:not(.btn-quiet)::before {
@@ -76,11 +76,16 @@ a { color: inherit; }
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-  opacity: 0; transition: opacity .25s var(--ease);
+  opacity: 0;
   pointer-events: none;
 }
-.btn:not(.btn-quiet):hover::before, .btn:not(.btn-quiet):focus-visible::before { opacity: 1; animation: orbit 1.1s linear infinite; }
-@keyframes orbit { to { --orbit: 360deg; } }
+.btn:not(.btn-quiet):hover::before, .btn:not(.btn-quiet):focus-visible::before { animation: orbit .9s cubic-bezier(.45, .05, .35, 1) 1 both; }
+@keyframes orbit {
+  0% { --orbit: 0deg; opacity: 0; }
+  12% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { --orbit: 360deg; opacity: 0; }
+}
 
 /* ---------- Hero ---------- */
 
