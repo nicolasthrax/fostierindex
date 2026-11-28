@@ -10,7 +10,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 // ---- Site settings: fill these in before going live -------------------------
 const SITE = {
   origin: 'https://fostierindex.com',
-  email: 'hello@fostierindex.com',
+  email: 'nicolas@fostierindex.com',
   // Digits only, with country code, e.g. '85291234567'. Empty hides the WhatsApp button.
   whatsapp: '',
   // Public URL of the Fostier Consulting case study. Empty hides the link.
@@ -21,7 +21,7 @@ const SITE = {
 // -----------------------------------------------------------------------------
 
 const year = new Date().getFullYear();
-const order = ['en', 'zh-hant', 'fr'];
+const order = ['en', 'zh-hant'];
 
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -54,7 +54,7 @@ const alternates = [
 
 for (const id of order) {
   const raw = locales[id];
-  const L = id === 'fr' ? Object.fromEntries(Object.entries(raw).map(([k, v]) => [k, frTypo(v)])) : raw;
+  const L = raw;
   const depth = L.path.split('/').filter(Boolean).length;
   const base = depth ? '../'.repeat(depth) : '';
   const canonical = SITE.origin + L.path;

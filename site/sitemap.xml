@@ -4,21 +4,12 @@
     <loc>https://fostierindex.com/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://fostierindex.com/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://fostierindex.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://fostierindex.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://fostierindex.com/"/>
   </url>
   <url>
     <loc>https://fostierindex.com/zh-hant/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://fostierindex.com/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://fostierindex.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://fostierindex.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://fostierindex.com/"/>
-  </url>
-  <url>
-    <loc>https://fostierindex.com/fr/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://fostierindex.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://fostierindex.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://fostierindex.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://fostierindex.com/"/>
   </url>
 </urlset>
