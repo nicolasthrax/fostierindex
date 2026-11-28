@@ -2,14 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://fostierindex.com/</loc>
+    <lastmod>2026-11-28</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://fostierindex.com/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://fostierindex.com/zh-hant/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://fostierindex.com/"/>
   </url>
   <url>
     <loc>https://fostierindex.com/zh-hant/</loc>
+    <lastmod>2026-11-28</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://fostierindex.com/"/>
     <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://fostierindex.com/zh-hant/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://fostierindex.com/"/>
+  </url>
+  <url>
+    <loc>https://fostierindex.com/aeo-guide/</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fostierindex.com/aeo-guide/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://fostierindex.com/zh-hant/aeo-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fostierindex.com/aeo-guide/"/>
+  </url>
+  <url>
+    <loc>https://fostierindex.com/zh-hant/aeo-guide/</loc>
+    <lastmod>2026-11-28</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fostierindex.com/aeo-guide/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hant-HK" href="https://fostierindex.com/zh-hant/aeo-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fostierindex.com/aeo-guide/"/>
   </url>
 </urlset>

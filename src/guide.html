@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{htmlLang}}">
+<head>
+{{{head}}}
+</head>
+<body class="guide-page">
+<a class="skip" href="#main">{{skip}}</a>
+
+{{{header}}}
+
+<main id="main" class="guide">
+  <nav class="crumbs" aria-label="{{nav.crumbs}}">
+    <ol><li><a href="{{home}}">{{nav.home}}</a></li><li aria-current="page">{{guide.crumb}}</li></ol>
+  </nav>
+  <article class="prose" aria-labelledby="guide-h">
+    <header class="prose-head">
+      <h1 id="guide-h">{{guide.h1}}</h1>
+      <p class="dateline">{{guide.updated}} <time datetime="{{modified}}">{{modifiedText}}</time> · Fostier Index</p>
+    </header>
+{{{guideBody}}}
+    <aside class="cta panel" aria-labelledby="cta-h">
+      <h2 id="cta-h">{{guide.ctaTitle}}</h2>
+      <p class="sub">{{guide.ctaText}}</p>
+      <a class="btn" href="{{home}}#consult">{{hero.cta}}</a>
+    </aside>
+  </article>
+</main>
+
+{{{footer}}}
+</body>
+</html>
