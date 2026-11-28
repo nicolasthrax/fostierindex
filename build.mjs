@@ -93,6 +93,7 @@ const asset = (f) => {
 };
 const assets = {
   'asset.favicon': asset('favicon.svg'),
+  'asset.logo': asset('logo.png'),
   'asset.styles': asset('styles.css'),
   'asset.three': asset('three.min.js'),
   'asset.field': asset('field.js'),
@@ -157,7 +158,7 @@ const orgNode = (L, homeUrl) => ({
   '@id': ORG,
   name: 'Fostier Index',
   url: `${SITE.origin}/`,
-  logo: { '@type': 'ImageObject', '@id': `${SITE.origin}/#logo`, url: `${SITE.origin}/assets/logo.png`, contentUrl: `${SITE.origin}/assets/logo.png`, width: 512, height: 512, caption: 'Fostier Index' },
+  logo: { '@type': 'ImageObject', '@id': `${SITE.origin}/#logo`, url: `${SITE.origin}/assets/logo.png`, contentUrl: `${SITE.origin}/assets/logo.png`, width: 800, height: 800, caption: 'Fostier Index' },
   image: `${SITE.origin}/assets/og.png`,
   description: L['meta.description'],
   slogan: L['hero.title'],
@@ -241,7 +242,7 @@ const graphFor = (key, id) => {
     return [
       ...base,
       ...serviceNodes(L),
-      webPageNode(L, key, id, { hasPart: [{ '@id': `${canonical}#faq` }, { '@id': `${canonical}#definitions` }] }),
+      webPageNode(L, key, id, { hasPart: [{ '@id': `${canonical}#faq` }] }),
       {
         '@type': 'FAQPage',
         '@id': `${canonical}#faq`,
@@ -250,20 +251,6 @@ const graphFor = (key, id) => {
         inLanguage: L.htmlLang,
         isPartOf: { '@id': `${canonical}#page` },
         mainEntity: L.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-      },
-      {
-        '@type': 'DefinedTermSet',
-        '@id': `${canonical}#definitions`,
-        name: L['def.title'],
-        inLanguage: L.htmlLang,
-        hasDefinedTerm: L.defs.map((d) => ({
-          '@type': 'DefinedTerm',
-          '@id': `${canonical}#term-${d.id}`,
-          name: d.name,
-          alternateName: d.id.toUpperCase(),
-          description: d.text,
-          inDefinedTermSet: { '@id': `${canonical}#definitions` },
-        })),
       },
     ];
   }
@@ -293,8 +280,22 @@ const graphFor = (key, id) => {
       publisher: { '@id': ORG },
       mainEntityOfPage: { '@id': `${canonical}#page` },
       isPartOf: { '@id': WEBSITE },
-      about: L.defs.map((d) => ({ '@type': 'Thing', name: d.name })),
+      about: L.defs.map((d) => ({ '@id': `${canonical}#term-${d.id}` })),
     },
+      {
+        '@type': 'DefinedTermSet',
+        '@id': `${canonical}#definitions`,
+        name: L['def.title'],
+        inLanguage: L.htmlLang,
+        hasDefinedTerm: L.defs.map((d) => ({
+          '@type': 'DefinedTerm',
+          '@id': `${canonical}#term-${d.id}`,
+          name: d.name,
+          alternateName: d.id.toUpperCase(),
+          description: d.text,
+          inDefinedTermSet: { '@id': `${canonical}#definitions` },
+        })),
+      },
   ];
 };
 
@@ -302,11 +303,9 @@ const jsonldFor = (key, id) =>
   JSON.stringify(clean({ '@context': 'https://schema.org', '@graph': graphFor(key, id) })).replace(/</g, '\\u003c');
 
 // ---- HTML fragments ---------------------------------------------------------
-const defsHtml = (L) =>
-  L.defs.map((d) => `<div class="def" id="term-${d.id}"><dt>${esc(d.term)}</dt><dd>${esc(d.text)}</dd></div>`).join('');
-const stepsHtml = (L) => L.steps.map((s) => `<li><h3>${esc(s.name)}</h3><p>${esc(s.text)}</p></li>`).join('');
+// Collapsible, but the answers stay in the HTML for crawlers and AI tools.
 const faqHtml = (L) =>
-  L.faq.map((f, i) => `<div class="qa" id="faq-${i + 1}"><h3>${esc(f.q)}</h3><p>${esc(f.a)}</p></div>`).join('');
+  L.faq.map((f, i) => `<details class="qa" id="faq-${i + 1}"><summary><h3>${esc(f.q)}</h3></summary><p>${esc(f.a)}</p></details>`).join('');
 
 const dateText = (d, L) =>
   new Intl.DateTimeFormat(L.htmlLang === 'en' ? 'en-GB' : 'zh-Hant-HK', { dateStyle: 'long', timeZone: 'Asia/Hong_Kong' }).format(d);
@@ -353,8 +352,6 @@ for (const key of pageKeys) {
       langLinks,
       jsonld: jsonldFor(key, id),
       industries: L.industries.map((n) => `<option value="${esc(n)}">${esc(n)}</option>`).join(''),
-      defsHtml: defsHtml(L),
-      stepsHtml: stepsHtml(L),
       faqHtml: faqHtml(L),
       guideBody: key === 'guide' ? read(`src/content/guide.${id}.html`) : '',
       modified: isoDate(mod),
@@ -435,12 +432,12 @@ writeFileSync(
     '',
     '## Pages',
     '',
-    `- [Home](${url('home', 'en')}): services, prices, definitions of SEO, AEO and GEO, method and FAQ`,
+    `- [Home](${url('home', 'en')}): services, prices and FAQ`,
     `- [${en['guide.h1']}](${url('guide', 'en')}): ${en['guide.metaDescription']}`,
     '',
     '## 繁體中文',
     '',
-    `- [主頁](${url('home', 'zh-hant')}): 服務、價格、SEO／AEO／GEO 定義、做法及常見問題`,
+    `- [主頁](${url('home', 'zh-hant')}): 服務、價格及常見問題`,
     `- [${zh['guide.h1']}](${url('guide', 'zh-hant')}): ${zh['guide.metaDescription']}`,
     '',
     '## Optional',
