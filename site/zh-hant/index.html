@@ -70,7 +70,7 @@
   </section>
 
   <section class="scene consult" id="consult" data-scene aria-labelledby="c-h">
-    <form class="panel" data-consult data-email="contact@fostierindex.com" data-subject="免費 AI 能見度諮詢" data-opened="您的電郵程式應已開啟並填好申請。如未開啟，請直接電郵 contact@fostierindex.com。">
+    <form class="panel" data-consult data-email="contact@fostierindex.com" data-subject="免費 AI 能見度諮詢" data-opened="您的電郵程式應會開啟並填好申請。">
       <h2 id="c-h">看看 AI 引用了誰，而不是您</h2>
       <p class="sub">預約免費 AI 能見度諮詢。我們會檢查貴公司在 Google、ChatGPT、Gemini 及 Perplexity 的表現，並與您講解結果。</p>
       <div class="field">
@@ -90,6 +90,14 @@
       </div>
       <button class="btn" type="submit">提交諮詢申請</button>
       <p class="note" data-note role="status">按下後會開啟您的電郵程式，並預先填好發送至 contact@fostierindex.com 的申請。</p>
+      <div class="fallback" data-fallback hidden>
+        <p>沒有開啟？改用以下方式發送：</p>
+        <div class="fallback-actions">
+          <a class="btn btn-quiet" data-gmail target="_blank" rel="noopener">Gmail</a>
+          <a class="btn btn-quiet" data-outlook target="_blank" rel="noopener">Outlook</a>
+          <button class="btn btn-quiet" type="button" data-copy data-copied="已複製" data-copied-note="已複製，請貼上並電郵至 contact@fostierindex.com。">複製申請內容</button>
+        </div>
+      </div>
     </form>
   </section>
 </main>

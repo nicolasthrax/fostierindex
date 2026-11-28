@@ -70,7 +70,7 @@
   </section>
 
   <section class="scene consult" id="consult" data-scene aria-labelledby="c-h">
-    <form class="panel" data-consult data-email="contact@fostierindex.com" data-subject="Free AI visibility consultation" data-opened="Your email app should now be open with the request filled in. If it isn’t, email contact@fostierindex.com.">
+    <form class="panel" data-consult data-email="contact@fostierindex.com" data-subject="Free AI visibility consultation" data-opened="Your email app should open with the request filled in.">
       <h2 id="c-h">See who AI cites instead of you.</h2>
       <p class="sub">Request a free AI visibility consultation. We check your firm in Google, ChatGPT, Gemini and Perplexity, then walk you through what we find.</p>
       <div class="field">
@@ -90,6 +90,14 @@
       </div>
       <button class="btn" type="submit">Request consultation</button>
       <p class="note" data-note role="status">This opens your email app with the request ready to send to contact@fostierindex.com.</p>
+      <div class="fallback" data-fallback hidden>
+        <p>Nothing opened? Send it another way:</p>
+        <div class="fallback-actions">
+          <a class="btn btn-quiet" data-gmail target="_blank" rel="noopener">Gmail</a>
+          <a class="btn btn-quiet" data-outlook target="_blank" rel="noopener">Outlook</a>
+          <button class="btn btn-quiet" type="button" data-copy data-copied="Copied" data-copied-note="Copied. Paste it into an email to contact@fostierindex.com.">Copy request</button>
+        </div>
+      </div>
     </form>
   </section>
 </main>
