@@ -49,8 +49,8 @@ export const locales = {
     'c.choose': 'Choose your industry',
     industries: ['Law firm', 'Medical or dental clinic', 'Wealth or immigration advisory', 'B2B consultancy', 'Property or luxury', 'Other'],
     'c.submit': 'Request consultation',
-    'c.note': 'This opens your email app with the request ready to send to nicolas@fostierindex.com.',
-    'c.opened': 'Your email app should now be open with the request filled in. If it isn’t, email nicolas@fostierindex.com.',
+    'c.note': 'This opens your email app with the request ready to send to contact@fostierindex.com.',
+    'c.opened': 'Your email app should now be open with the request filled in. If it isn’t, email contact@fostierindex.com.',
     'c.subject': 'Free AI visibility consultation',
 
     'foot.promise': 'Results depend on factors beyond any agency’s control, including search engines and AI platforms.',
@@ -109,8 +109,8 @@ export const locales = {
     'c.choose': '請選擇行業',
     industries: ['律師行', '醫療或牙科診所', '財富管理或移民顧問', 'B2B 顧問公司', '地產或奢侈品', '其他'],
     'c.submit': '提交諮詢申請',
-    'c.note': '按下後會開啟您的電郵程式，並預先填好發送至 nicolas@fostierindex.com 的申請。',
-    'c.opened': '您的電郵程式應已開啟並填好申請。如未開啟，請直接電郵 nicolas@fostierindex.com。',
+    'c.note': '按下後會開啟您的電郵程式，並預先填好發送至 contact@fostierindex.com 的申請。',
+    'c.opened': '您的電郵程式應已開啟並填好申請。如未開啟，請直接電郵 contact@fostierindex.com。',
     'c.subject': '免費 AI 能見度諮詢',
 
     'foot.promise': '成效受搜尋引擎及 AI 平台等外在因素影響，非任何機構所能控制。',

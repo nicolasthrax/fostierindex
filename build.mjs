@@ -11,7 +11,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 const SITE = {
   origin: 'https://fostierindex.com',
   // Consultation requests open a pre-filled email to this address.
-  email: 'nicolas@fostierindex.com',
+  email: 'contact@fostierindex.com',
 };
 // -----------------------------------------------------------------------------
 

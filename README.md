@@ -23,7 +23,7 @@ node build.mjs
 
 ## Consultation requests
 
-The form doesn't send anything itself. It opens the visitor's email app with a pre-filled request to `nicolas@fostierindex.com`. To change the address, edit `SITE.email` in `build.mjs` and rebuild.
+The form doesn't send anything itself. It opens the visitor's email app with a pre-filled request to `contact@fostierindex.com`. To change the address, edit `SITE.email` in `build.mjs` and rebuild.
 
 ## Preview locally
 

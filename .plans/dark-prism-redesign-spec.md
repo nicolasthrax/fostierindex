@@ -32,7 +32,7 @@ Replaces the porcelain/Bodoni/orbit design (PR nicolasthrax/fostierindex#1), whi
    - Authority retainer from HK$6,000 a month.
 3. **Consultation request**, framed as a free AI visibility consultation:
    - Fields: firm name, website, industry (law, medical/dental, wealth/immigration, B2B consulting, property/luxury, other).
-   - Submitting opens a pre-filled email to **nicolas@fostierindex.com**. There is no form backend.
+   - Submitting opens a pre-filled email to **contact@fostierindex.com**. There is no form backend.
 4. **Footer:** wordmark, Hong Kong, ©, EN / 繁. One-line promise: we guarantee the build, never rankings or AI citations.
 
 ## Left out for now
