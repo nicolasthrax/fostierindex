@@ -98,6 +98,7 @@ const assets = {
   'asset.three': asset('three.min.js'),
   'asset.field': asset('field.js'),
   'asset.consult': asset('consult.js'),
+  'asset.orbit': asset('orbit.js'),
 };
 
 const partials = {
