@@ -13,16 +13,13 @@ export const locales = {
       'Fostier Index rebuilds websites for established Hong Kong firms so Google ranks them and ChatGPT, Gemini and Perplexity cite them.',
     skip: 'Skip to content',
     langLabel: 'Language',
-    'nav.cta': 'Free consultation',
 
     'hero.title': 'Get cited.',
     'hero.sub':
       'We rebuild websites for established Hong Kong firms so Google ranks them and ChatGPT, Gemini and Perplexity cite them.',
     'hero.cta': 'Request a free AI visibility consultation',
     'hero.sceneAlt':
-      'A dark glass prism. Faint rays from a question flow into it, and a single jade beam leaves it and lands on your firm, cited as source one.',
-    'hero.query': 'Best immigration advisor in Hong Kong?',
-    you: 'Your firm',
+      'A field of fine jade light, like the sources of the web. One point shines brighter than the rest.',
 
     'svc.title': 'How you get cited.',
     'svc.sub': 'Fixed scope and price, agreed before any work starts.',
@@ -79,14 +76,11 @@ export const locales = {
       'Fostier Index 為香港具規模的企業重建網站，讓 Google 為您排名，讓 ChatGPT、Gemini 及 Perplexity 引用您。',
     skip: '跳至內容',
     langLabel: '語言',
-    'nav.cta': '免費諮詢',
 
     'hero.title': '獲 AI 引用',
     'hero.sub': '我們為香港具規模的企業重建網站，讓 Google 為您排名，讓 ChatGPT、Gemini 及 Perplexity 引用您。',
     'hero.cta': '預約免費 AI 能見度諮詢',
-    'hero.sceneAlt': '一個深色玻璃稜鏡。來自提問的微光射入稜鏡，一道翡翠色光束射出，落在貴公司之上，成為第一個引用來源。',
-    'hero.query': '香港最好的移民顧問是誰？',
-    you: '貴公司',
+    'hero.sceneAlt': '一片如網絡資料來源般的翡翠色微光，其中一點比其他更明亮。',
 
     'svc.title': '如何獲得引用',
     'svc.sub': '範圍與價格固定，開始前雙方確認。',
