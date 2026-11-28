@@ -53,7 +53,7 @@ export const locales = {
     'c.opened': 'Your email app should now be open with the request filled in. If it isn’t, email nicolas@fostierindex.com.',
     'c.subject': 'Free AI visibility consultation',
 
-    'foot.promise': 'We guarantee the build, never rankings or AI citations. No one honestly can.',
+    'foot.promise': 'Rankings and AI citations depend on many things, so results may vary.',
     'foot.place': 'Hong Kong',
 
     'svc.diag': 'AEO/GEO Diagnostic',
@@ -113,7 +113,7 @@ export const locales = {
     'c.opened': '您的電郵程式應已開啟並填好申請。如未開啟，請直接電郵 nicolas@fostierindex.com。',
     'c.subject': '免費 AI 能見度諮詢',
 
-    'foot.promise': '我們保證交付成果，但絕不保證排名或 AI 引用。沒有人能誠實作出這種保證。',
+    'foot.promise': '排名及 AI 引用受多種因素影響，實際效果或因情況而異。',
     'foot.place': '香港',
 
     'svc.diag': 'AEO/GEO 診斷',
