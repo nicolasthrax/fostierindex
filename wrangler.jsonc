@@ -1,11 +1,12 @@
 // Cloudflare Workers config: serves the static site built by `node build.mjs` into ./site.
-// Workers Builds needs this file for non-production (PR/preview) builds, which run
-// `npx wrangler versions upload` with no extra flags.
+// Workers Builds needs this file for preview (PR branch) builds, which run
+// `npx wrangler preview` with no extra flags. That command requires the `previews` block.
 {
   "name": "fostierindex",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./site",
     "not_found_handling": "404-page"
-  }
+  },
+  "previews": {}
 }
