@@ -19,7 +19,7 @@ const SITE = {
   // Official profiles of the firm, used as schema.org sameAs. Add each URL once it exists:
   // LinkedIn company page, Google Business Profile (maps link), Wikidata item, Crunchbase,
   // Facebook / Instagram / YouTube, and HK directory listings that have a stable profile URL.
-  sameAs: [],
+  sameAs: ['https://www.linkedin.com/company/fostierindex'],
   // Founder or lead expert, published only with the owner's approval. Example shape:
   // { name: '...', jobTitle: '...', url: 'https://fostierindex.com/about/', sameAs: ['https://www.linkedin.com/in/...'] }
   founder: null,
