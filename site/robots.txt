@@ -1,4 +1,43 @@
+# Fostier Index crawler policy. Everything public is open to search, AI answers and AI training.
+
+# Search engines
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: DuckDuckBot
+User-agent: Baiduspider
+User-agent: YandexBot
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+
+# AI search and answer crawlers, and fetches made for a user
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: MistralAI-User
+User-agent: DuckAssistBot
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+
+# AI training crawlers (allowed: ai-train=yes)
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: Amazonbot
+User-agent: Bytespider
+User-agent: cohere-ai
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+
+# Everyone else
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
 
 Sitemap: https://fostierindex.com/sitemap.xml

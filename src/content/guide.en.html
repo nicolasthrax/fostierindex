@@ -1,0 +1,58 @@
+<p class="answer">To be cited by AI search, a Hong Kong firm needs three things: a website that search engines and AI crawlers can read, pages that answer clients’ questions directly in English and Traditional Chinese, and a consistent presence elsewhere on the web that confirms who the firm is. This guide explains each one, and what to check on your own site.</p>
+
+<h2 id="definitions">What are SEO, AEO and GEO?</h2>
+<p><strong>Search engine optimisation (SEO)</strong> is the work of making a website easy for Google and Bing to crawl, understand and rank. <strong>Answer engine optimisation (AEO)</strong> is the work of making a firm the source that an AI answer quotes or names when someone asks a direct question. <strong>Generative engine optimisation (GEO)</strong> is the wider work of shaping what generative AI tools say about a firm and its field, including on sites the firm doesn’t own.</p>
+<div class="table-wrap">
+<table>
+  <caption>SEO, AEO and GEO compared</caption>
+  <thead>
+    <tr><th scope="col"></th><th scope="col">SEO</th><th scope="col">AEO</th><th scope="col">GEO</th></tr>
+  </thead>
+  <tbody>
+    <tr><th scope="row">Goal</th><td>Rank in search results</td><td>Be quoted or named in the answer</td><td>Be mentioned, described accurately and recommended</td></tr>
+    <tr><th scope="row">Where it shows</th><td>Google and Bing results</td><td>Google AI Overviews and AI Mode, ChatGPT, Gemini, Perplexity, Copilot</td><td>Any generative AI tool, including ones that don’t search the web</td></tr>
+    <tr><th scope="row">Depends most on</th><td>Crawlable pages, relevance, links</td><td>Answer-first pages, structured data, being indexed</td><td>What directories, press, reviews and profiles say about you</td></tr>
+  </tbody>
+</table>
+</div>
+<p>The three overlap more than the names suggest. Google describes optimising for its AI features as still being SEO, and most AI answers are built from pages that a search index already holds. In practice, AEO and GEO are SEO done with AI answers in mind.</p>
+
+<h2 id="how-ai-chooses">How do AI answers choose their sources?</h2>
+<p>Most AI assistants answer in one of two ways. Tools that search the web, such as Google AI Overviews, ChatGPT search, Perplexity and Copilot, run searches at the moment of the question, read a handful of pages and summarise them, often with links. Tools that don’t search answer from what their model learned in training, which reflects what the web said about a firm before the model was built.</p>
+<p>Either way, a page is more likely to be used when:</p>
+<ul>
+  <li>it is already indexed and trusted by a search engine;</li>
+  <li>it states the answer plainly near the top, in a passage that makes sense on its own;</li>
+  <li>it comes from an organisation the tool can identify, with a consistent name, address and description across the web;</li>
+  <li>it is current, with facts, prices and dates that match what the firm says elsewhere.</li>
+</ul>
+
+<h2 id="on-site">What should a firm fix on its own website?</h2>
+<ol>
+  <li><strong>Make the text readable without JavaScript.</strong> Several AI crawlers read the raw HTML and don’t run scripts, so the words that matter should be in the page itself.</li>
+  <li><strong>Let AI search crawlers in.</strong> Check robots.txt allows Googlebot, Bingbot, OAI-SearchBot, Claude-SearchBot and PerplexityBot, and that your firewall doesn’t challenge them.</li>
+  <li><strong>Write one page per client question.</strong> Open with a direct answer, then the detail. Use the words clients use, not internal jargon.</li>
+  <li><strong>Add structured data.</strong> Mark up the organisation, its services, its articles and its questions and answers in JSON-LD, with stable identifiers and the same facts the page shows.</li>
+  <li><strong>Publish each language separately.</strong> Give English and Traditional Chinese their own URLs, each with a self-referencing canonical and hreflang tags that point to the other.</li>
+  <li><strong>Keep the firm’s details identical everywhere.</strong> The same name, contact details and description on the site, in its markup and on every profile.</li>
+  <li><strong>Show who is behind the content and when it was updated.</strong> Named experts with credentials, and visible dates.</li>
+</ol>
+
+<h2 id="off-site">What happens off the website?</h2>
+<p>AI tools look for corroboration. A firm that only describes itself on its own site is harder to trust than one that is described the same way by others. The sources that matter most for an established Hong Kong firm are usually:</p>
+<ul>
+  <li>a complete Google Business Profile and Bing Places listing;</li>
+  <li>listings with professional bodies, chambers of commerce and industry directories;</li>
+  <li>press coverage and expert commentary in Hong Kong and regional media;</li>
+  <li>genuine client reviews on the platforms clients already use;</li>
+  <li>expert and company profiles, such as LinkedIn and, where the firm is notable, Wikidata.</li>
+</ul>
+
+<h2 id="languages">Writing for English and Traditional Chinese readers</h2>
+<p>Clients in Hong Kong ask the same question in different words depending on the language. Traditional Chinese pages should use Hong Kong vocabulary rather than Taiwanese or Mainland terms, for example 律師行 rather than 律師事務所 for a law firm, and should never be Simplified Chinese converted to Traditional. Mark them with the hreflang code <code>zh-Hant-HK</code> so search engines know they are for Hong Kong readers.</p>
+
+<h2 id="measure">How do you measure AI visibility?</h2>
+<p>Pick 20 to 30 questions your clients really ask. Each month, put them to ChatGPT, Gemini, Perplexity and Google AI Mode, and record which firms and which sources each answer names. AI answers vary from one run to the next, so judge the trend across repeated checks rather than a single answer. Alongside this, Google Search Console and Bing Webmaster Tools show whether your pages are indexed and which searches find them.</p>
+
+<h2 id="this-site">Does this site follow its own advice?</h2>
+<p>Yes. This site serves its full text as HTML, allows search and AI crawlers in robots.txt with an explicit content-use signal, publishes an llms.txt summary, marks up the organisation, its services and its questions in JSON-LD, and links its English and Traditional Chinese pages with hreflang.</p>

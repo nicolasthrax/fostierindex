@@ -1,29 +1,7 @@
 <!doctype html>
 <html lang="{{htmlLang}}">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{meta.title}}</title>
-<meta name="description" content="{{meta.description}}">
-<link rel="canonical" href="{{canonical}}">
-{{{alternates}}}
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Fostier Index">
-<meta property="og:title" content="{{meta.title}}">
-<meta property="og:description" content="{{meta.description}}">
-<meta property="og:url" content="{{canonical}}">
-<meta property="og:image" content="{{origin}}/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="{{ogLocale}}">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#030A08">
-<link rel="icon" href="{{base}}assets/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="{{base}}assets/styles.css">
-<script type="application/ld+json">{{{jsonld}}}</script>
+{{{head}}}
 </head>
 <body>
 <a class="skip" href="#main">{{skip}}</a>
@@ -31,10 +9,7 @@
 <canvas class="stage" data-field aria-hidden="true"></canvas>
 <div class="veil" data-veil aria-hidden="true"></div>
 
-<header class="top">
-  <a class="word" href="{{home}}">Fostier Index</a>
-  <nav class="langs" aria-label="{{langLabel}}">{{{langLinks}}}</nav>
-</header>
+{{{header}}}
 
 <main id="main">
   <section class="hero" data-scene>
@@ -98,17 +73,40 @@
       </div>
     </form>
   </section>
+  <div class="read">
+    <section class="read-sec" id="definitions" aria-labelledby="def-h">
+      <div class="read-head">
+        <h2 id="def-h">{{def.title}}</h2>
+        <p class="sub">{{def.sub}}</p>
+      </div>
+      <div class="read-body">
+        <dl class="defs">{{{defsHtml}}}</dl>
+        <p class="read-note">{{def.hk}}</p>
+        <p class="read-more"><a href="{{guideHref}}">{{def.more}}</a></p>
+      </div>
+    </section>
+
+    <section class="read-sec" id="method" aria-labelledby="method-h">
+      <div class="read-head">
+        <h2 id="method-h">{{method.title}}</h2>
+        <p class="sub">{{method.sub}}</p>
+      </div>
+      <ol class="steps read-body">{{{stepsHtml}}}</ol>
+    </section>
+
+    <section class="read-sec" id="faq" aria-labelledby="faq-h">
+      <div class="read-head">
+        <h2 id="faq-h">{{faq.title}}</h2>
+      </div>
+      <div class="faq read-body">{{{faqHtml}}}</div>
+    </section>
+  </div>
 </main>
 
-<footer class="foot">
-  <p class="word">Fostier Index</p>
-  <p class="foot-promise">{{foot.promise}}</p>
-  <p class="foot-meta">© {{year}} Fostier Index, {{foot.place}}. <a href="mailto:{{email}}">{{email}}</a></p>
-  <nav class="langs" aria-label="{{langLabel}}">{{{langLinks}}}</nav>
-</footer>
+{{{footer}}}
 
-<script src="{{base}}assets/three.min.js"></script>
-<script src="{{base}}assets/field.js"></script>
-<script src="{{base}}assets/consult.js"></script>
+<script src="{{asset.three}}" defer></script>
+<script src="{{asset.field}}" defer></script>
+<script src="{{asset.consult}}" defer></script>
 </body>
 </html>
