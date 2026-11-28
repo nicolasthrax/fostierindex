@@ -15,6 +15,8 @@
 <meta property="og:description" content="Fostier Index 為香港具規模的企業重建網站，讓 Google 為您排名，讓 ChatGPT、Gemini 及 Perplexity 引用您。">
 <meta property="og:url" content="https://fostierindex.com/zh-hant/">
 <meta property="og:image" content="https://fostierindex.com/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="zh_HK">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#030A08">
@@ -23,13 +25,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300..700&family=Noto+Sans+TC:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="../assets/styles.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://fostierindex.com/#org","name":"Fostier Index","url":"https://fostierindex.com/","email":"nicolas@fostierindex.com","logo":"https://fostierindex.com/assets/favicon.svg","image":"https://fostierindex.com/assets/og.png","description":"Fostier Index 為香港具規模的企業重建網站，讓 Google 為您排名，讓 ChatGPT、Gemini 及 Perplexity 引用您。","address":{"@type":"PostalAddress","addressLocality":"Hong Kong","addressCountry":"HK"},"areaServed":{"@type":"City","name":"Hong Kong"},"availableLanguage":["en","zh-Hant","fr"],"knowsAbout":["Search engine optimization","Answer engine optimization","Generative engine optimization"],"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"AEO/GEO 診斷"},"priceSpecification":{"@type":"PriceSpecification","priceCurrency":"HKD","minPrice":1500,"maxPrice":2500}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO/GEO 網站重建"},"priceSpecification":{"@type":"PriceSpecification","priceCurrency":"HKD","minPrice":12000,"maxPrice":25000}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"每月權威建立及 GEO 服務"},"priceSpecification":{"@type":"UnitPriceSpecification","priceCurrency":"HKD","minPrice":6000,"maxPrice":12000,"unitCode":"MON"}}]},{"@type":"WebPage","@id":"https://fostierindex.com/zh-hant/#page","url":"https://fostierindex.com/zh-hant/","name":"Fostier Index | 讓您的香港企業獲 AI 搜尋引用","inLanguage":"zh-Hant-HK","about":{"@id":"https://fostierindex.com/#org"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://fostierindex.com/#org","name":"Fostier Index","url":"https://fostierindex.com/","email":"nicolas@fostierindex.com","image":"https://fostierindex.com/assets/og.png","description":"Fostier Index 為香港具規模的企業重建網站，讓 Google 為您排名，讓 ChatGPT、Gemini 及 Perplexity 引用您。","address":{"@type":"PostalAddress","addressLocality":"Hong Kong","addressCountry":"HK"},"areaServed":{"@type":"City","name":"Hong Kong"},"availableLanguage":["en","zh-Hant"],"knowsAbout":["Search engine optimization","Answer engine optimization","Generative engine optimization"],"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"AEO/GEO 診斷"},"priceSpecification":{"@type":"PriceSpecification","priceCurrency":"HKD","minPrice":1500}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"SEO/GEO 網站重建"},"priceSpecification":{"@type":"PriceSpecification","priceCurrency":"HKD","minPrice":12000}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"每月權威建立及 GEO 服務"},"priceSpecification":{"@type":"UnitPriceSpecification","priceCurrency":"HKD","minPrice":6000,"unitCode":"MON"}}]},{"@type":"WebPage","@id":"https://fostierindex.com/zh-hant/#page","url":"https://fostierindex.com/zh-hant/","name":"Fostier Index | 讓您的香港企業獲 AI 搜尋引用","inLanguage":"zh-Hant-HK","about":{"@id":"https://fostierindex.com/#org"}}]}</script>
 </head>
 <body>
 <a class="skip" href="#main">跳至內容</a>
 
 <canvas class="stage" data-prism aria-hidden="true"></canvas>
-<div class="stage-labels" aria-hidden="true">
+<div class="veil" data-veil aria-hidden="true"></div>
+<div class="stage-labels" data-labels aria-hidden="true">
   <div class="tag tag-query" data-anchor="query"><span class="tag-dot"></span>香港最好的移民顧問是誰？</div>
   <div class="tag tag-cite" data-anchor="cite"><b>1</b>貴公司</div>
 </div>
@@ -41,7 +44,7 @@
 </header>
 
 <main id="main">
-  <section class="hero">
+  <section class="hero" data-scene>
     <p class="sr-only">一個深色玻璃稜鏡。來自提問的微光射入稜鏡，一道翡翠色光束射出，落在貴公司之上，成為第一個引用來源。</p>
     <h1>獲 AI 引用</h1>
     <div class="hero-side">
@@ -49,9 +52,62 @@
       <a class="btn" href="#consult">預約免費 AI 能見度諮詢</a>
     </div>
   </section>
+
+  <section class="scene services" id="services" data-scene aria-labelledby="svc-h">
+    <div class="services-body">
+      <h2 id="svc-h">如何獲得引用</h2>
+      <p class="sub">範圍與價格固定，開始前雙方確認。</p>
+      <ol class="menu">
+        <li>
+          <div class="menu-what"><h3>診斷</h3><p>比較您與兩間本地競爭對手在 Google 及 AI 搜尋中的表現。費用可抵扣網站重建。</p></div>
+          <p class="price"><span></span> <b>HK$1,500</b> <span>起</span></p>
+        </li>
+        <li>
+          <div class="menu-what"><h3>網站重建</h3><p>全新網站架構、結構化資料標記及答案優先頁面，以您客戶搜尋時所用的語言呈現。</p></div>
+          <p class="price"><span></span> <b>HK$12,000</b> <span>起</span></p>
+        </li>
+        <li>
+          <div class="menu-what"><h3>權威建立</h3><p>名錄登錄、媒體報道及專業內容，給 AI 工具引用您的理由。最少三個月。</p></div>
+          <p class="price"><span>每月</span> <b>HK$6,000</b> <span>起</span></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="scene consult" id="consult" data-scene aria-labelledby="c-h">
+    <form class="panel" data-consult data-email="nicolas@fostierindex.com" data-subject="免費 AI 能見度諮詢" data-opened="您的電郵程式應已開啟並填好申請。如未開啟，請直接電郵 nicolas@fostierindex.com。">
+      <h2 id="c-h">看看 AI 引用了誰，而不是您</h2>
+      <p class="sub">預約免費 AI 能見度諮詢。我們會檢查貴公司在 Google、ChatGPT、Gemini 及 Perplexity 的表現，並與您講解結果。</p>
+      <div class="field">
+        <label for="firm">公司名稱</label>
+        <input id="firm" name="firm" type="text" autocomplete="organization" required>
+      </div>
+      <div class="field">
+        <label for="site">網站</label>
+        <input id="site" name="site" type="text" inputmode="url" autocomplete="url" placeholder="yourfirm.com.hk" required>
+      </div>
+      <div class="field">
+        <label for="industry">行業</label>
+        <select id="industry" name="industry" required>
+          <option value="" disabled selected>請選擇行業</option>
+          <option value="律師行">律師行</option><option value="醫療或牙科診所">醫療或牙科診所</option><option value="財富管理或移民顧問">財富管理或移民顧問</option><option value="B2B 顧問公司">B2B 顧問公司</option><option value="地產或奢侈品">地產或奢侈品</option><option value="其他">其他</option>
+        </select>
+      </div>
+      <button class="btn" type="submit">提交諮詢申請</button>
+      <p class="note" data-note role="status">按下後會開啟您的電郵程式，並預先填好發送至 nicolas@fostierindex.com 的申請。</p>
+    </form>
+  </section>
 </main>
+
+<footer class="foot">
+  <p class="word">Fostier Index</p>
+  <p class="foot-promise">我們保證交付成果，但絕不保證排名或 AI 引用。沒有人能誠實作出這種保證。</p>
+  <p class="foot-meta">© 2026 Fostier Index, 香港. <a href="mailto:nicolas@fostierindex.com">nicolas@fostierindex.com</a></p>
+  <nav class="langs" aria-label="語言"><a href="../" hreflang="en" lang="en" aria-label="English">EN</a><a href="../zh-hant/" hreflang="zh-Hant-HK" lang="zh-Hant-HK" aria-label="繁體中文" aria-current="page">繁</a></nav>
+</footer>
 
 <script src="../assets/three.min.js"></script>
 <script src="../assets/prism.js"></script>
+<script src="../assets/consult.js"></script>
 </body>
 </html>

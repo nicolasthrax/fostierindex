@@ -39,6 +39,7 @@ a { color: inherit; }
 .stage { position: fixed; inset: 0; width: 100%; height: 100%; display: block; z-index: 0; }
 .no-webgl .stage { background: radial-gradient(60% 50% at 62% 42%, rgba(47, 180, 135, .28), transparent 70%), var(--obsidian); }
 
+.veil { position: fixed; inset: 0; z-index: 1; background: var(--obsidian); opacity: 0; pointer-events: none; }
 .stage-labels { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
 .tag {
   position: absolute; left: 0; top: 0;
@@ -110,9 +111,107 @@ main { position: relative; z-index: 2; }
 .lede { font-size: 1.125rem; line-height: 1.5; color: var(--muted); text-wrap: pretty; }
 :lang(zh-Hant-HK) .lede { line-height: 1.8; }
 
+/* ---------- Scenes after the hero ---------- */
+
+.scene {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding: clamp(96px, 14vh, 160px) var(--gutter);
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(2.5rem, 5.6vw, 5.5rem);
+  font-weight: 600;
+  line-height: .95;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+:lang(zh-Hant-HK) h2 { font-family: "Noto Sans TC", var(--sans); font-weight: 700; letter-spacing: 0; line-height: 1.15; }
+.sub { margin-top: 20px; max-width: 46ch; font-size: 1.125rem; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+:lang(zh-Hant-HK) .sub { line-height: 1.8; }
+
+/* Services: a price list on the right, the prism on the left */
+.services { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.services-body { grid-column: 2; }
+.menu { list-style: none; margin: clamp(40px, 6vh, 64px) 0 0; padding: 0; border-bottom: 1px solid var(--line); }
+.menu li {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 40px; align-items: baseline;
+  padding: 30px 0; border-top: 1px solid var(--line);
+}
+.menu h3 { margin: 0; font-size: clamp(1.75rem, 2.8vw, 2.5rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.1; }
+.menu-what p { margin-top: 10px; max-width: 44ch; color: var(--muted); text-wrap: pretty; }
+.price { display: flex; align-items: baseline; gap: .4em; white-space: nowrap; color: var(--muted); font-size: .9375rem; }
+.price b { font-size: clamp(1.375rem, 2vw, 1.75rem); font-weight: 600; letter-spacing: -0.02em; color: var(--pale); font-variant-numeric: tabular-nums; }
+.price span:empty { display: none; }
+
+/* Consultation: a glass panel on the left, the prism on the right */
+.consult { grid-template-columns: minmax(0, 600px) minmax(0, 1fr); padding-block: clamp(64px, 9vh, 120px); }
+.panel {
+  display: grid; gap: 16px;
+  padding: clamp(28px, 4vw, 48px);
+  border-radius: 28px;
+  background: rgba(5, 18, 14, .66);
+  box-shadow: inset 0 0 0 1px var(--line), 0 40px 120px -40px rgba(0, 0, 0, .8);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.panel h2 { font-size: clamp(2.125rem, 3.6vw, 3.25rem); }
+.panel .sub { margin: 0 0 8px; }
+.field { display: grid; gap: 8px; }
+.field label { font-size: .9375rem; font-weight: 500; color: var(--mist); }
+.field input, .field select {
+  width: 100%; min-height: 54px; padding: 0 18px;
+  border: 1px solid rgba(169, 232, 207, .22); border-radius: 14px;
+  background: rgba(3, 10, 8, .7); color: var(--mist);
+  font: 400 1rem/1.2 var(--sans);
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.field input::placeholder { color: rgba(143, 165, 155, .7); }
+.field select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  padding-right: 48px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%236FE0B6' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 18px center;
+}
+.field select:invalid { color: rgba(143, 165, 155, .9); }
+.field option { background: #07150f; color: var(--mist); }
+.field input:hover, .field select:hover { border-color: rgba(169, 232, 207, .4); }
+.field input:focus, .field select:focus { outline: none; border-color: var(--jade-hi); box-shadow: 0 0 0 3px rgba(47, 180, 135, .25); }
+.panel .btn { margin-top: 8px; width: 100%; border: 0; cursor: pointer; }
+.note { font-size: .875rem; line-height: 1.5; color: var(--muted); }
+.note.done { color: var(--pale); }
+
+/* Footer */
+.foot {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 16px 40px;
+  padding: 32px var(--gutter) 40px;
+  border-top: 1px solid var(--line);
+  background: rgba(3, 10, 8, .85);
+  font-size: .875rem; color: var(--muted);
+}
+.foot .word { margin: 0; color: var(--mist); }
+.foot-promise { max-width: 60ch; text-wrap: pretty; }
+.foot-meta a { color: var(--mist); text-underline-offset: 3px; }
+
+/* 404 */
+.lost-page { background: radial-gradient(60% 50% at 70% 40%, rgba(47, 180, 135, .22), transparent 70%), var(--obsidian); min-height: 100vh; }
+.lost { display: grid; gap: 24px; justify-items: start; padding: 12vh var(--gutter); }
+.lost h1 { font-size: clamp(3rem, 8vw, 7rem); font-weight: 600; letter-spacing: -0.05em; line-height: .95; }
+
+@media (max-width: 960px) {
+  .services, .consult { grid-template-columns: 1fr; }
+  .services-body { grid-column: 1; }
+  .foot { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; align-content: end; gap: 20px; }
   .hero-side { padding-bottom: 0; }
+  .services { align-items: start; padding-top: 38svh; }
+  .consult { align-items: start; padding-top: 30svh; }
 }
 
 @media (max-width: 560px) {
@@ -123,8 +222,13 @@ main { position: relative; z-index: 2; }
   .tag { font-size: .8125rem; padding: 7px 12px 7px 8px; gap: 8px; }
   .tag-dot { width: 18px; height: 18px; }
   .tag-cite b { width: 22px; height: 22px; }
+  .menu li { grid-template-columns: 1fr; padding: 24px 0; }
+  .price { margin-top: 6px; }
+  .panel { border-radius: 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }
 }
+
+:lang(zh-Hant-HK) .menu-what p, :lang(zh-Hant-HK) .note { line-height: 1.8; }

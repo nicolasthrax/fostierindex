@@ -7,16 +7,11 @@ import { locales } from './src/i18n.mjs';
 
 const root = dirname(fileURLToPath(import.meta.url));
 
-// ---- Site settings: fill these in before going live -------------------------
+// ---- Site settings ----------------------------------------------------------
 const SITE = {
   origin: 'https://fostierindex.com',
+  // Consultation requests open a pre-filled email to this address.
   email: 'nicolas@fostierindex.com',
-  // Digits only, with country code, e.g. '85291234567'. Empty hides the WhatsApp button.
-  whatsapp: '',
-  // Public URL of the Fostier Consulting case study. Empty hides the link.
-  proofUrl: '',
-  // Optional scheduling link (Cal.com, Calendly...). Empty falls back to an email.
-  bookingUrl: '',
 };
 // -----------------------------------------------------------------------------
 
@@ -26,15 +21,8 @@ const order = ['en', 'zh-hant'];
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-// French typography: narrow no-break space before ? ! : ; and as thousands separator.
-const frTypo = (s) =>
-  typeof s === 'string'
-    ? s.replace(/ ([?!:;])/g, ' $1').replace(/(\d) (\d{3})/g, '$1 $2').replace(/ – /g, ' – ')
-    : s;
-
 const render = (tpl, vars) =>
   tpl
-    .replace(/\{\{#if ([\w.]+)\}\}([\s\S]*?)\{\{\/if\}\}/g, (_, k, body) => (vars[k] ? body : ''))
     .replace(/\{\{\{\s*([\w.]+)\s*\}\}\}/g, (_, k) => {
       if (!(k in vars)) throw new Error(`Missing raw key: ${k}`);
       return vars[k];
@@ -53,32 +41,33 @@ const alternates = [
 ].join('\n');
 
 for (const id of order) {
-  const raw = locales[id];
-  const L = raw;
+  const L = locales[id];
   const depth = L.path.split('/').filter(Boolean).length;
   const base = depth ? '../'.repeat(depth) : '';
   const canonical = SITE.origin + L.path;
-
-  const bookHref = SITE.bookingUrl || `mailto:${SITE.email}?subject=${encodeURIComponent(L.mailSubject)}`;
 
   const langLinks = order
     .map((o) => {
       const t = locales[o];
       const href = base + t.path.replace(/^\//, '') || './';
       const cur = o === id ? ' aria-current="page"' : '';
-      return `<a href="${href || './'}" hreflang="${t.hreflang}" lang="${t.htmlLang}" aria-label="${esc(t.langName)}"${cur}>${t.langShort}</a>`;
+      return `<a href="${href}" hreflang="${t.hreflang}" lang="${t.htmlLang}" aria-label="${esc(t.langName)}"${cur}>${t.langShort}</a>`;
     })
     .join('');
 
-  const offer = (name, min, max, unit) => ({
+  const industries = L.industries
+    .map((name) => `<option value="${esc(name)}">${esc(name)}</option>`)
+    .join('');
+
+  // "From" prices, matching what the page shows.
+  const offer = (name, min, monthly) => ({
     '@type': 'Offer',
     itemOffered: { '@type': 'Service', name },
     priceSpecification: {
-      '@type': unit ? 'UnitPriceSpecification' : 'PriceSpecification',
+      '@type': monthly ? 'UnitPriceSpecification' : 'PriceSpecification',
       priceCurrency: 'HKD',
       minPrice: min,
-      maxPrice: max,
-      ...(unit ? { unitCode: 'MON' } : {}),
+      ...(monthly ? { unitCode: 'MON' } : {}),
     },
   });
 
@@ -91,17 +80,16 @@ for (const id of order) {
         name: 'Fostier Index',
         url: `${SITE.origin}/`,
         email: SITE.email,
-        logo: `${SITE.origin}/assets/favicon.svg`,
         image: `${SITE.origin}/assets/og.png`,
         description: L['meta.description'],
         address: { '@type': 'PostalAddress', addressLocality: 'Hong Kong', addressCountry: 'HK' },
         areaServed: { '@type': 'City', name: 'Hong Kong' },
-        availableLanguage: ['en', 'zh-Hant', 'fr'],
+        availableLanguage: ['en', 'zh-Hant'],
         knowsAbout: ['Search engine optimization', 'Answer engine optimization', 'Generative engine optimization'],
         makesOffer: [
-          offer(L['svc.diag'], 1500, 2500),
-          offer(L['svc.rebuild'], 12000, 25000),
-          offer(L['svc.retainer'], 6000, 12000, true),
+          offer(L['svc.diag'], 1500),
+          offer(L['svc.rebuild'], 12000),
+          offer(L['svc.retainer'], 6000, true),
         ],
       },
       {
@@ -121,12 +109,11 @@ for (const id of order) {
     base,
     year,
     canonical,
-    bookHref,
     home: base || './',
     alternates,
     langLinks,
+    industries,
     jsonld,
-    queriesJson: JSON.stringify([L['q.1'], L['q.2'], L['q.3']]),
   };
 
   const outDir = join(root, 'site', L.path);

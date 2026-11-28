@@ -49,3 +49,5 @@ Replaces the porcelain/Bodoni/orbit design (PR nicolasthrax/fostierindex#1), whi
 ## Process
 
 The owner sees a screenshot of the hero first. The rest of the page is built only after they approve it.
+
+- **Status:** hero approved. Services, consultation, footer, scroll views, the 404 page and the share image are built.

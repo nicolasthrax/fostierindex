@@ -13,6 +13,8 @@
 <meta property="og:description" content="{{meta.description}}">
 <meta property="og:url" content="{{canonical}}">
 <meta property="og:image" content="{{origin}}/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta property="og:locale" content="{{ogLocale}}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#030A08">
@@ -27,7 +29,8 @@
 <a class="skip" href="#main">{{skip}}</a>
 
 <canvas class="stage" data-prism aria-hidden="true"></canvas>
-<div class="stage-labels" aria-hidden="true">
+<div class="veil" data-veil aria-hidden="true"></div>
+<div class="stage-labels" data-labels aria-hidden="true">
   <div class="tag tag-query" data-anchor="query"><span class="tag-dot"></span>{{hero.query}}</div>
   <div class="tag tag-cite" data-anchor="cite"><b>1</b>{{you}}</div>
 </div>
@@ -39,7 +42,7 @@
 </header>
 
 <main id="main">
-  <section class="hero">
+  <section class="hero" data-scene>
     <p class="sr-only">{{hero.sceneAlt}}</p>
     <h1>{{hero.title}}</h1>
     <div class="hero-side">
@@ -47,9 +50,62 @@
       <a class="btn" href="#consult">{{hero.cta}}</a>
     </div>
   </section>
+
+  <section class="scene services" id="services" data-scene aria-labelledby="svc-h">
+    <div class="services-body">
+      <h2 id="svc-h">{{svc.title}}</h2>
+      <p class="sub">{{svc.sub}}</p>
+      <ol class="menu">
+        <li>
+          <div class="menu-what"><h3>{{s1.name}}</h3><p>{{s1.desc}}</p></div>
+          <p class="price"><span>{{s1.lead}}</span> <b>{{s1.amount}}</b> <span>{{s1.tail}}</span></p>
+        </li>
+        <li>
+          <div class="menu-what"><h3>{{s2.name}}</h3><p>{{s2.desc}}</p></div>
+          <p class="price"><span>{{s2.lead}}</span> <b>{{s2.amount}}</b> <span>{{s2.tail}}</span></p>
+        </li>
+        <li>
+          <div class="menu-what"><h3>{{s3.name}}</h3><p>{{s3.desc}}</p></div>
+          <p class="price"><span>{{s3.lead}}</span> <b>{{s3.amount}}</b> <span>{{s3.tail}}</span></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="scene consult" id="consult" data-scene aria-labelledby="c-h">
+    <form class="panel" data-consult data-email="{{email}}" data-subject="{{c.subject}}" data-opened="{{c.opened}}">
+      <h2 id="c-h">{{c.title}}</h2>
+      <p class="sub">{{c.sub}}</p>
+      <div class="field">
+        <label for="firm">{{c.firm}}</label>
+        <input id="firm" name="firm" type="text" autocomplete="organization" required>
+      </div>
+      <div class="field">
+        <label for="site">{{c.site}}</label>
+        <input id="site" name="site" type="text" inputmode="url" autocomplete="url" placeholder="{{c.sitePh}}" required>
+      </div>
+      <div class="field">
+        <label for="industry">{{c.industry}}</label>
+        <select id="industry" name="industry" required>
+          <option value="" disabled selected>{{c.choose}}</option>
+          {{{industries}}}
+        </select>
+      </div>
+      <button class="btn" type="submit">{{c.submit}}</button>
+      <p class="note" data-note role="status">{{c.note}}</p>
+    </form>
+  </section>
 </main>
+
+<footer class="foot">
+  <p class="word">Fostier Index</p>
+  <p class="foot-promise">{{foot.promise}}</p>
+  <p class="foot-meta">© {{year}} Fostier Index, {{foot.place}}. <a href="mailto:{{email}}">{{email}}</a></p>
+  <nav class="langs" aria-label="{{langLabel}}">{{{langLinks}}}</nav>
+</footer>
 
 <script src="{{base}}assets/three.min.js"></script>
 <script src="{{base}}assets/prism.js"></script>
+<script src="{{base}}assets/consult.js"></script>
 </body>
 </html>

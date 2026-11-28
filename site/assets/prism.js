@@ -1,9 +1,12 @@
 // Fostier Index — the obsidian prism.
 // Faint rays (the web's sources) flow into a dark glass prism; one jade beam
-// leaves it and lands on "Your firm", cited as source [1].
+// leaves it and lands on "Your firm", cited as source [1]. The prism stays
+// behind the page and the camera moves to a new view for each scene.
 (() => {
   const root = document.documentElement;
   const canvas = document.querySelector('[data-prism]');
+  const veil = document.querySelector('[data-veil]');
+  const labels = document.querySelector('[data-labels]');
   if (!canvas || !window.THREE) { root.classList.add('no-webgl'); return; }
   const T = window.THREE;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -29,7 +32,7 @@
   scene.fog = new T.Fog(BG, 9, 21);
   const camera = new T.PerspectiveCamera(30, 1, 0.1, 100);
 
-  /* ---- Studio environment: soft boxes the obsidian reflects ---- */
+  /* ---- Studio environment: light strips the obsidian reflects ---- */
   const pmrem = new T.PMREMGenerator(renderer);
   const env = new T.Scene();
   const softbox = (w, h, hex, k, x, y, z) => {
@@ -41,9 +44,9 @@
     m.lookAt(0, 0, 0);
     env.add(m);
   };
-  softbox(0.7, 14, 0xffffff, 3.2, -9, 2, -6);  // thin white strip, back left (a streak on the left face)
+  softbox(0.7, 14, 0xffffff, 3.2, -9, 2, -6);  // thin white strip, back left
   softbox(0.9, 14, 0x6fe0b6, 3.2, 9, 1, -6);   // thin jade strip, back right
-  softbox(9, 9, 0xdff5ec, 0.9, 0, 11, 1);      // overhead (top face)
+  softbox(9, 9, 0xdff5ec, 0.9, 0, 11, 1);      // overhead
   softbox(7, 2.2, 0xffffff, 2.2, -6, 5, 6);    // key, front left
   softbox(1.4, 9, 0x6fe0b6, 2.4, 8, 0, 4);     // jade, front right
   softbox(12, 1.4, 0xbfe9d8, 0.8, 0, -7, 4);   // floor bounce
@@ -87,10 +90,14 @@
   const rayTex = strip((v) => Math.pow(v, 1.5) * (1 - ss(0.97, 1, v)));
   const beamTex = strip((v) => ss(0, 0.04, v) * (1 - 0.3 * v) * (1 - ss(0.92, 1, v)));
 
-  const additive = (map, color, opacity) => new T.MeshBasicMaterial({
-    map, color, transparent: true, opacity, blending: T.AdditiveBlending,
-    depthWrite: false, side: T.DoubleSide, fog: false,
-  });
+  const additive = (map, color, opacity) => {
+    const m = new T.MeshBasicMaterial({
+      map, color, transparent: true, opacity, blending: T.AdditiveBlending,
+      depthWrite: false, side: T.DoubleSide, fog: false,
+    });
+    m.userData.base = opacity;
+    return m;
+  };
   const UP = new T.Vector3(0, 1, 0);
   const strand = (a, b, width, mat) => {
     const dir = new T.Vector3().subVectors(b, a);
@@ -111,6 +118,7 @@
     const s = new T.Sprite(new T.SpriteMaterial({
       map: glowTex, color, transparent: true, opacity, blending: T.AdditiveBlending, depthWrite: false, fog: false,
     }));
+    s.material.userData.base = opacity;
     s.scale.setScalar(scale);
     return s;
   };
@@ -158,7 +166,7 @@
   scene.add(floor);
   const pool = new T.Mesh(new T.PlaneGeometry(1, 1), additive(glowTex, JADE, 0.32));
   pool.rotation.x = -Math.PI / 2;
-  pool.scale.set(7, 3.2, 1);
+  pool.position.y = -2.19;
   scene.add(pool);
 
   /* ---- Dust in the light ---- */
@@ -173,105 +181,130 @@
   }
   const dustGeo = new T.BufferGeometry();
   dustGeo.setAttribute('position', new T.BufferAttribute(dustPos, 3));
-  const dust = new T.Points(dustGeo, new T.PointsMaterial({
+  scene.add(new T.Points(dustGeo, new T.PointsMaterial({
     map: glowTex, color: 0xbfeedd, size: 0.07, transparent: true, opacity: 0.55,
     blending: T.AdditiveBlending, depthWrite: false,
-  }));
-  scene.add(dust);
+  })));
 
-  /* ---- Light paths (rebuilt per layout) ---- */
-  const lightGroup = new T.Group();
-  scene.add(lightGroup);
-  const rays = [];
-  const pulses = [];
-  const anchors = { query: new T.Vector3(), cite: new T.Vector3() };
-  let flareIn, flareOut, flareEnd;
-
-  // Entry and exit points on the prism, in rig space.
-  const ENTRY = new T.Vector3(-0.55, 0.3, 0.62);
-  const EXIT = new T.Vector3(0.62, 0.75, 0.55);
-
-  const LAYOUTS = {
+  /* ---- Views: one per scene (hero, services, consultation) ---- */
+  // Hero positions are given in world space; the light paths are built from them
+  // in rig space so they travel with the prism into the later views.
+  const VIEWS = {
     wide: {
-      cam: [0, 2.3, 12.5], look: [0, 0.75, 0], rig: [1.75, 1.15, 0], scale: 0.94,
       query: [-3.6, 3.15, 0.4], cite: [4.0, 3.0, 0.4],
       rays: { x: [-7, -2.4], y: [2.4, 4.4], z: [-2.5, 1.2] },
+      keys: [
+        { cam: [0, 2.3, 12.5], look: [0, 0.75, 0], rig: [1.75, 1.15, 0], rotY: 0, scale: 0.94, rays: 1, tags: 1, beam: 1, veil: 0, glow: 0.42 },
+        { cam: [0, 1.6, 12], look: [0, 0.9, 0], rig: [-3.3, 0.85, -1], rotY: 0.7, scale: 1, rays: 0.2, tags: 0, beam: 0.9, veil: 0.12, glow: 0.5 },
+        { cam: [0, 2.4, 12.5], look: [0, 0.9, 0], rig: [3.0, 0.95, -1.2], rotY: -0.45, scale: 1, rays: 0, tags: 0, beam: 0.55, veil: 0.08, glow: 0.45 },
+      ],
     },
     tall: {
-      cam: [0, 3.0, 15], look: [0, 1.5, 0], rig: [-0.15, 2.0, 0], scale: 0.62,
       query: [-0.05, 4.5, 0.4], cite: [1.05, 3.4, 0.4],
       rays: { x: [-3.4, -1.2], y: [3.6, 5.6], z: [-2, 1] },
+      keys: [
+        { cam: [0, 3.0, 15], look: [0, 1.5, 0], rig: [-0.15, 2.0, 0], rotY: 0, scale: 0.62, rays: 1, tags: 1, beam: 1, veil: 0, glow: 0.42 },
+        { cam: [0, 3.0, 15], look: [0, 1.5, 0], rig: [0.1, 3.3, -1.5], rotY: 0.7, scale: 0.5, rays: 0.15, tags: 0, beam: 0.9, veil: 0.4, glow: 0.45 },
+        { cam: [0, 3.0, 15], look: [0, 1.5, 0], rig: [0.1, 3.4, -1.5], rotY: -0.45, scale: 0.5, rays: 0, tags: 0, beam: 0.55, veil: 0.35, glow: 0.45 },
+      ],
     },
   };
-  let layout = null;
 
-  const buildLight = (L) => {
+  const lightGroup = new T.Group();
+  rig.add(lightGroup);
+  const rays = [];
+  const pulses = [];
+  const rayMats = [];
+  const beamMats = [];
+  const flares = [];
+  const anchors = { query: new T.Vector3(), cite: new T.Vector3() };
+  const ENTRY = new T.Vector3(-0.55, 0.3, 0.62);
+  const EXIT = new T.Vector3(0.62, 0.75, 0.55);
+  let view = null, viewName = '';
+
+  const buildLight = (V) => {
     lightGroup.clear();
-    rays.length = 0;
-    pulses.length = 0;
-    rig.updateMatrixWorld(true);
-    const e = rig.localToWorld(ENTRY.clone());
-    const x = rig.localToWorld(EXIT.clone());
-    const c = new T.Vector3(...L.cite);
-    anchors.query.set(...L.query);
-    anchors.cite.copy(c);
+    rays.length = pulses.length = rayMats.length = beamMats.length = flares.length = 0;
+    const k0 = V.keys[0];
+    const toLocal = (p) => new T.Vector3(
+      (p[0] - k0.rig[0]) / k0.scale, (p[1] - k0.rig[1]) / k0.scale, (p[2] - k0.rig[2]) / k0.scale
+    );
+    anchors.query.copy(toLocal(V.query));
+    anchors.cite.copy(toLocal(V.cite));
+    const c = anchors.cite;
 
     const n = light ? 22 : 42;
     for (let i = 0; i < n; i++) {
-      const a = new T.Vector3(
-        L.rays.x[0] + rnd() * (L.rays.x[1] - L.rays.x[0]),
-        L.rays.y[0] + rnd() * (L.rays.y[1] - L.rays.y[0]),
-        L.rays.z[0] + rnd() * (L.rays.z[1] - L.rays.z[0])
-      );
-      const tint = rnd() < 0.3 ? JADE_HI : 0xdff5ec;
-      lightGroup.add(strand(a, e, 0.05 + rnd() * 0.05, additive(rayTex, tint, 0.16 + rnd() * 0.22)));
-      const p = sprite(0xe9fff6, 0, 0.16 + rnd() * 0.1);
+      const a = toLocal([
+        V.rays.x[0] + rnd() * (V.rays.x[1] - V.rays.x[0]),
+        V.rays.y[0] + rnd() * (V.rays.y[1] - V.rays.y[0]),
+        V.rays.z[0] + rnd() * (V.rays.z[1] - V.rays.z[0]),
+      ]);
+      const mat = additive(rayTex, rnd() < 0.3 ? JADE_HI : 0xdff5ec, 0.16 + rnd() * 0.22);
+      rayMats.push(mat);
+      lightGroup.add(strand(a, ENTRY, (0.05 + rnd() * 0.05) / k0.scale, mat));
+      const p = sprite(0xe9fff6, 0, (0.16 + rnd() * 0.1) / k0.scale);
       lightGroup.add(p);
-      rays.push({ a, b: e, p, speed: 0.12 + rnd() * 0.16, phase: rnd() });
+      rays.push({ a, b: ENTRY, p, speed: 0.12 + rnd() * 0.16, phase: rnd() });
     }
 
     // The answer: one jade beam to your firm
-    lightGroup.add(strand(x, c, 0.5 * L.scale + 0.25, additive(beamTex, JADE, 0.55)));
-    lightGroup.add(strand(x, c, 0.09, additive(beamTex, JADE_HI, 1)));
-    lightGroup.add(strand(x, c, 0.03, additive(beamTex, 0xffffff, 0.9)));
+    [[0.75, JADE, 0.55], [0.1, JADE_HI, 1], [0.035, 0xffffff, 0.9]].forEach(([w, col, o]) => {
+      const mat = additive(beamTex, col, o);
+      beamMats.push(mat);
+      lightGroup.add(strand(EXIT, c, w, mat));
+    });
     for (let i = 0; i < 3; i++) {
       const p = sprite(0xd9fff0, 0, 0.45);
       lightGroup.add(p);
-      pulses.push({ a: x, b: c, p, phase: i / 3 });
+      pulses.push({ a: EXIT, b: c, p, phase: i / 3 });
     }
-    flareIn = sprite(0xdff5ec, 0.5, 0.9); flareIn.position.copy(e); lightGroup.add(flareIn);
-    flareOut = sprite(JADE_HI, 0.9, 1.4); flareOut.position.copy(x); lightGroup.add(flareOut);
-    flareEnd = sprite(JADE, 0.85, 1.6); flareEnd.position.copy(c); lightGroup.add(flareEnd);
+    const flare = (col, o, s, at) => { const f = sprite(col, o, s); f.position.copy(at); lightGroup.add(f); flares.push(f); };
+    flare(0xdff5ec, 0.5, 0.9, ENTRY);
+    flare(JADE_HI, 0.9, 1.4, EXIT);
+    flare(JADE, 0.85, 1.6, c);
   };
 
-  const applyLayout = (name) => {
-    if (layout === name) return;
-    layout = name;
-    const L = LAYOUTS[name];
-    camera.position.set(...L.cam);
-    camera.userData.base = new T.Vector3(...L.cam);
-    camera.userData.look = new T.Vector3(...L.look);
-    camera.lookAt(camera.userData.look);
-    rig.position.set(...L.rig);
-    rig.scale.setScalar(L.scale);
-    pool.position.set(L.rig[0], -2.19, L.rig[2] + 0.4);
-    pool.scale.set(7 * L.scale, 3.2 * L.scale, 1);
-    buildLight(L);
+  /* ---- Scroll: which view, and how far between two ---- */
+  const scenes = [...document.querySelectorAll('[data-scene]')];
+  let tops = [];
+  let target = 0, prog = 0;
+  const measure = () => { tops = scenes.map((s) => s.getBoundingClientRect().top + window.scrollY); };
+  const readScroll = () => {
+    const vh = window.innerHeight;
+    const a = window.scrollY + vh * 0.75;
+    let p = 0;
+    for (let i = 1; i < tops.length; i++) p += Math.min(1, Math.max(0, (a - tops[i]) / (vh * 0.6)));
+    target = p;
+  };
+
+  const lerp = (a, b, f) => a + (b - a) * f;
+  const mix3 = (a, b, f) => [lerp(a[0], b[0], f), lerp(a[1], b[1], f), lerp(a[2], b[2], f)];
+  const state = (p) => {
+    const K = view.keys;
+    const i = Math.min(K.length - 2, Math.max(0, Math.floor(p)));
+    const f = ss(0, 1, p - i);
+    const a = K[i], b = K[i + 1];
+    const out = {};
+    for (const k of Object.keys(a)) out[k] = Array.isArray(a[k]) ? mix3(a[k], b[k], f) : lerp(a[k], b[k], f);
+    return out;
   };
 
   /* ---- HTML labels pinned to 3D points ---- */
   const tags = {};
   document.querySelectorAll('[data-anchor]').forEach((el) => { tags[el.dataset.anchor] = el; });
   const v = new T.Vector3();
-  const placeTags = (W, H) => {
+  let W = 0, H = 0;
+  const placeTags = () => {
     for (const key of Object.keys(tags)) {
       const el = tags[key];
-      v.copy(anchors[key]).project(camera);
+      v.copy(anchors[key]);
+      rig.localToWorld(v);
+      v.project(camera);
       let px = ((v.x + 1) / 2) * W;
       let py = ((1 - v.y) / 2) * H;
       const w = el.offsetWidth, h = el.offsetHeight;
       if (key === 'cite') {
-        // sit just past the beam's end; if that would leave the screen, sit above it
         let lx = px + 14, ly = py - h / 2;
         if (lx + w > W - 12) { lx = Math.max(12, W - 12 - w); ly = py - h - 18; }
         px = lx; py = ly;
@@ -279,21 +312,10 @@
         px = Math.min(Math.max(12, px - w / 2), W - 12 - w);
         py -= h / 2;
       }
+      py = Math.max(py, W < 560 ? 76 : 88); // keep clear of the header
       el.style.transform = `translate3d(${px.toFixed(1)}px, ${py.toFixed(1)}px, 0)`;
       el.classList.add('on');
     }
-  };
-
-  /* ---- Size ---- */
-  let W = 0, H = 0;
-  const resize = () => {
-    W = canvas.clientWidth; H = canvas.clientHeight;
-    if (!W || !H) return;
-    renderer.setSize(W, H, false);
-    camera.aspect = W / H;
-    camera.updateProjectionMatrix();
-    applyLayout(W / H < 0.85 ? 'tall' : 'wide');
-    if (!running) render(reduce ? 3.2 : clock);
   };
 
   /* ---- Pointer ---- */
@@ -304,32 +326,44 @@
   }, { passive: true });
 
   /* ---- Frame ---- */
-  const tmp = new T.Vector3();
   const render = (t) => {
+    if (!view) return;
+    // Reduced motion keeps the hero view and only dims the 3D under content.
+    const s = state(reduce ? 0 : prog);
+    const sv = reduce ? state(target) : s;
+
     mx += (tx - mx) * 0.04;
     my += (ty - my) * 0.04;
     pivot.rotation.y = mx * 0.22 + Math.sin(t * 0.22) * 0.08;
     pivot.rotation.x = 0.06 + my * 0.06;
-    const base = camera.userData.base, look = camera.userData.look;
-    if (base) {
-      camera.position.set(base.x + mx * 0.35, base.y - my * 0.2, base.z);
-      camera.lookAt(look);
-    }
 
+    rig.position.set(s.rig[0], s.rig[1], s.rig[2]);
+    rig.rotation.y = s.rotY;
+    rig.scale.setScalar(s.scale);
+    rig.updateMatrixWorld(true);
+    pool.position.set(s.rig[0], -2.19, s.rig[2] + 0.4);
+    pool.scale.set(7 * s.scale, 3.2 * s.scale, 1);
+    backGlow.material.opacity = s.glow;
+    camera.position.set(s.cam[0] + mx * 0.35, s.cam[1] - my * 0.2, s.cam[2]);
+    camera.lookAt(s.look[0], s.look[1], s.look[2]);
+    camera.updateMatrixWorld(true);
+
+    for (const m of rayMats) m.opacity = m.userData.base * s.rays;
+    for (const m of beamMats) m.opacity = m.userData.base * s.beam;
     for (const r of rays) {
       const f = (t * r.speed + r.phase) % 1;
       r.p.position.lerpVectors(r.a, r.b, f);
-      r.p.material.opacity = Math.sin(f * Math.PI) * 0.75;
+      r.p.material.opacity = Math.sin(f * Math.PI) * 0.75 * s.rays;
     }
     for (const q of pulses) {
       const f = (t * 0.32 + q.phase) % 1;
       q.p.position.lerpVectors(q.a, q.b, f);
-      q.p.material.opacity = Math.sin(f * Math.PI) * 0.9;
+      q.p.material.opacity = Math.sin(f * Math.PI) * 0.9 * s.beam;
     }
-    if (flareOut) {
-      flareOut.material.opacity = 0.75 + Math.sin(t * 2.1) * 0.15;
-      flareEnd.scale.setScalar(1.5 + Math.sin(t * 1.6) * 0.15);
-    }
+    flares[0].material.opacity = flares[0].material.userData.base * Math.max(s.rays, 0.25);
+    flares[1].material.opacity = (0.75 + Math.sin(t * 2.1) * 0.15) * s.beam;
+    flares[2].material.opacity = flares[2].material.userData.base * s.beam;
+    flares[2].scale.setScalar(1.5 + Math.sin(t * 1.6) * 0.15);
 
     const d = dustGeo.attributes.position.array;
     for (let i = 0; i < DUST; i++) {
@@ -339,14 +373,18 @@
     dustGeo.attributes.position.needsUpdate = true;
 
     renderer.render(scene, camera);
-    placeTags(W, H);
+    if (veil) veil.style.opacity = sv.veil.toFixed(3);
+    if (labels) labels.style.opacity = sv.tags.toFixed(3);
+    placeTags();
   };
 
   let running = false, clock = 0, last = 0;
   const loop = (now) => {
     if (!running) return;
-    clock += last ? Math.min((now - last) / 1000, 0.05) : 0;
+    const dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
     last = now;
+    clock += dt;
+    prog += (target - prog) * Math.min(1, dt * 4.5);
     render(clock);
     requestAnimationFrame(loop);
   };
@@ -357,9 +395,24 @@
     requestAnimationFrame(loop);
   };
 
+  /* ---- Size ---- */
+  const resize = () => {
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    if (!W || !H) return;
+    renderer.setSize(W, H, false);
+    camera.aspect = W / H;
+    camera.updateProjectionMatrix();
+    const name = W / H < 0.85 ? 'tall' : 'wide';
+    if (name !== viewName) { viewName = name; view = VIEWS[name]; buildLight(view); }
+    measure();
+    readScroll();
+    if (!running) { prog = target; render(reduce ? 3.2 : clock); }
+  };
+
+  window.addEventListener('scroll', () => { readScroll(); if (reduce) render(3.2); }, { passive: true });
   resize();
-  new ResizeObserver(resize).observe(canvas);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => placeTags(W, H));
+  new ResizeObserver(resize).observe(document.body);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { measure(); readScroll(); });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) running = false;
     else start();
