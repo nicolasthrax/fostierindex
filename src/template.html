@@ -88,6 +88,14 @@
       </div>
       <button class="btn" type="submit">{{c.submit}}</button>
       <p class="note" data-note role="status">{{c.note}}</p>
+      <div class="fallback" data-fallback hidden>
+        <p>{{c.fallback}}</p>
+        <div class="fallback-actions">
+          <a class="btn btn-quiet" data-gmail target="_blank" rel="noopener">Gmail</a>
+          <a class="btn btn-quiet" data-outlook target="_blank" rel="noopener">Outlook</a>
+          <button class="btn btn-quiet" type="button" data-copy data-copied="{{c.copiedBtn}}" data-copied-note="{{c.copied}}">{{c.copy}}</button>
+        </div>
+      </div>
     </form>
   </section>
 </main>

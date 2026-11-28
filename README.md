@@ -37,13 +37,10 @@ cd site && python3 -m http.server 8000
 
 Open http://localhost:8000. The 3D view needs WebGL; without it, the page falls back to a jade glow.
 
-## Deploy on Cloudflare
+## Deploy on Cloudflare Pages
 
-The site is deployed as a Cloudflare Worker that serves static files (free plan). The repo is connected in Cloudflare under **Workers & Pages**, and every push to `main` redeploys it.
-
+- Framework preset: None
 - Build command: `node build.mjs`
-- Deploy command: `npx wrangler deploy`
+- Build output directory: `site`
 
-`wrangler.jsonc` points Cloudflare at the `site` folder, and makes unknown addresses show `site/404.html` with a real 404 status.
-
-Add `fostierindex.com` as a custom domain under the Worker's **Settings → Domains & Routes**.
+Add `fostierindex.com` as the custom domain.
