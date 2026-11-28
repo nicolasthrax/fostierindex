@@ -74,31 +74,13 @@
     </form>
   </section>
   <div class="read">
-    <section class="read-sec" id="definitions" aria-labelledby="def-h">
-      <div class="read-head">
-        <h2 id="def-h">{{def.title}}</h2>
-        <p class="sub">{{def.sub}}</p>
-      </div>
-      <div class="read-body">
-        <dl class="defs">{{{defsHtml}}}</dl>
-        <p class="read-note">{{def.hk}}</p>
-        <p class="read-more"><a href="{{guideHref}}">{{def.more}}</a></p>
-      </div>
-    </section>
-
-    <section class="read-sec" id="method" aria-labelledby="method-h">
-      <div class="read-head">
-        <h2 id="method-h">{{method.title}}</h2>
-        <p class="sub">{{method.sub}}</p>
-      </div>
-      <ol class="steps read-body">{{{stepsHtml}}}</ol>
-    </section>
-
     <section class="read-sec" id="faq" aria-labelledby="faq-h">
       <div class="read-head">
         <h2 id="faq-h">{{faq.title}}</h2>
       </div>
-      <div class="faq read-body">{{{faqHtml}}}</div>
+      <div class="faq read-body">{{{faqHtml}}}
+        <p class="read-more"><a href="{{guideHref}}">{{faq.more}}</a></p>
+      </div>
     </section>
   </div>
 </main>

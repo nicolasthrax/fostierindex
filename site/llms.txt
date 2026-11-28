@@ -12,12 +12,12 @@ Contact: contact@fostierindex.com. Consultation requests: https://fostierindex.c
 
 ## Pages
 
-- [Home](https://fostierindex.com/): services, prices, definitions of SEO, AEO and GEO, method and FAQ
+- [Home](https://fostierindex.com/): services, prices and FAQ
 - [SEO, AEO and GEO for Hong Kong firms](https://fostierindex.com/aeo-guide/): What SEO, AEO and GEO mean, how AI answers pick their sources, and what a Hong Kong firm should fix on and off its website to be cited.
 
 ## 繁體中文
 
-- [主頁](https://fostierindex.com/zh-hant/): 服務、價格、SEO／AEO／GEO 定義、做法及常見問題
+- [主頁](https://fostierindex.com/zh-hant/): 服務、價格及常見問題
 - [香港企業的 SEO、AEO 與 GEO](https://fostierindex.com/zh-hant/aeo-guide/): SEO、AEO 與 GEO 是甚麼、AI 答案如何選擇資料來源，以及香港企業要在網站內外做好哪些事，才能以中英文獲 AI 引用。
 
 ## Optional

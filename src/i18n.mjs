@@ -63,9 +63,8 @@ export const locales = {
     'svc.diag': 'AEO/GEO Diagnostic',
     'svc.rebuild': 'SEO/GEO website rebuild',
     'svc.retainer': 'Monthly authority and GEO retainer',
-    // ---- Answer-first content (home page, below the consultation form) ----
+    // ---- Definitions (used in the guide's structured data) and the home-page FAQ ----
     'def.title': 'SEO, AEO and GEO, in plain terms.',
-    'def.sub': 'Three names for one job: making your firm the answer when clients search, whether they ask Google or an AI assistant.',
     defs: [
       {
         id: 'seo',
@@ -86,30 +85,7 @@ export const locales = {
         text: 'Generative engine optimisation (GEO) is the wider work of shaping what generative AI tools say about your firm and your field: whether they mention you, describe you accurately and recommend you. Beyond your own site, it depends on what the rest of the web says about you, in directories, press, reviews and expert profiles.',
       },
     ],
-    'def.hk':
-      'For a Hong Kong firm, all three run in two languages. Clients search in English and in Traditional Chinese, so each language needs its own page, written the way people actually ask, and linked with hreflang tags so search engines show the right version.',
-    'def.more': 'Read the full guide to SEO, AEO and GEO for Hong Kong firms',
-
-    'method.title': 'How we work.',
-    'method.sub': 'Four steps. The scope and price of each are agreed before it starts.',
-    steps: [
-      {
-        name: 'Diagnose',
-        text: 'We put the questions your clients ask to Google, ChatGPT, Gemini and Perplexity, and compare your firm with two local competitors. You see who gets cited, and why.',
-      },
-      {
-        name: 'Rebuild',
-        text: 'We rebuild your site’s architecture, structured data and key pages so that each page answers a real client question first, in English and Traditional Chinese.',
-      },
-      {
-        name: 'Build authority',
-        text: 'We get your firm listed and mentioned where AI tools look for corroboration: directories, industry bodies, press and expert content.',
-      },
-      {
-        name: 'Measure',
-        text: 'We re-check the same questions in the same AI tools and report what changed, so decisions rest on evidence rather than guesswork.',
-      },
-    ],
+    'faq.more': 'Read the full guide to SEO, AEO and GEO',
 
     'faq.title': 'Questions firms ask us.',
     faq: [
@@ -227,9 +203,8 @@ export const locales = {
     'svc.diag': 'AEO/GEO 診斷',
     'svc.rebuild': 'SEO/GEO 網站重建',
     'svc.retainer': '每月權威建立及 GEO 服務',
-    // ---- 答案優先內容（主頁，諮詢表格下方）----
+    // ---- 定義（指南結構化資料）及主頁常見問題 ----
     'def.title': 'SEO、AEO 與 GEO 是甚麼？',
-    'def.sub': '三個名稱，同一個目標：無論客戶問 Google 還是 AI 助理，答案都是您的公司。',
     defs: [
       {
         id: 'seo',
@@ -250,30 +225,7 @@ export const locales = {
         text: '生成式引擎優化（GEO）的範圍更廣，目標是影響生成式 AI 工具如何談論您的公司及所屬行業：會否提及您、描述是否準確、會否推薦您。除了您自己的網站，這亦取決於網上其他地方如何介紹您，例如名錄、媒體報道、評價及專業人士簡介。',
       },
     ],
-    'def.hk':
-      '對香港企業而言，三者都要以兩種語言進行。客戶會以英文及繁體中文搜尋，因此每種語言都需要獨立頁面，按客戶實際的提問方式撰寫，並以 hreflang 標籤連結，讓搜尋引擎顯示正確的版本。',
-    'def.more': '閱讀完整指南：香港企業的 SEO、AEO 與 GEO',
-
-    'method.title': '我們的做法',
-    'method.sub': '四個步驟，每一步的範圍及價格都會在開始前確認。',
-    steps: [
-      {
-        name: '診斷',
-        text: '我們把客戶常問的問題交給 Google、ChatGPT、Gemini 及 Perplexity，並將貴公司與兩間本地競爭對手比較。您會看到誰獲引用，以及原因。',
-      },
-      {
-        name: '重建',
-        text: '我們重建網站架構、結構化資料及重點頁面，讓每一頁都先回答一個真實的客戶問題，並提供英文及繁體中文版本。',
-      },
-      {
-        name: '建立權威',
-        text: '我們讓貴公司在 AI 工具查證資料的地方出現及獲提及：名錄、行業組織、媒體及專業內容。',
-      },
-      {
-        name: '追蹤成效',
-        text: '我們在同樣的 AI 工具重新檢查同一組問題，並匯報有何變化，讓決策有根有據，而非憑感覺。',
-      },
-    ],
+    'faq.more': '閱讀完整指南：SEO、AEO 與 GEO',
 
     'faq.title': '企業常問的問題',
     faq: [

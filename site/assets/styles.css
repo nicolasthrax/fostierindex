@@ -211,25 +211,26 @@ h2 {
 .read-head .sub { margin-top: 16px; }
 .read-body { max-width: 68ch; }
 .read h3 { margin: 0; font-size: clamp(1.25rem, 1.8vw, 1.5rem); font-weight: 500; letter-spacing: -0.02em; line-height: 1.25; color: var(--mist); }
-.read p, .read dd { color: var(--muted); text-wrap: pretty; }
+.read p { color: var(--muted); text-wrap: pretty; }
 
-.defs { margin: 0; }
-.def { padding: 0 0 28px; }
-.def + .def { padding-top: 28px; border-top: 1px solid var(--line); }
-.defs dt { font-size: clamp(1.25rem, 1.8vw, 1.5rem); font-weight: 500; letter-spacing: -0.02em; color: var(--mist); }
-.defs dd { margin: 10px 0 0; }
-.read-note { margin-top: 28px; padding: 20px 24px; border-radius: 18px; box-shadow: inset 0 0 0 1px var(--line); }
-.read-more { margin-top: 20px; }
+.read-more { margin-top: 24px; }
 .read-more a, .prose a { color: var(--jade-hi); text-underline-offset: 3px; }
 
-.steps { list-style: none; margin: 0; padding: 0; counter-reset: step; border-bottom: 1px solid var(--line); }
-.steps li { counter-increment: step; display: grid; grid-template-columns: 3.25rem minmax(0, 1fr); column-gap: 8px; padding: 24px 0; border-top: 1px solid var(--line); }
-.steps li::before { content: counter(step, decimal-leading-zero); grid-row: span 2; padding-top: .2em; color: var(--jade-hi); font-weight: 600; font-variant-numeric: tabular-nums; }
-.steps p { margin-top: 8px; }
-
-.qa { padding: 24px 0; border-top: 1px solid var(--line); scroll-margin-top: 24px; }
-.qa:first-child { padding-top: 0; border-top: 0; }
-.qa p { margin-top: 10px; }
+/* FAQ: collapsible; answers stay in the HTML for crawlers */
+.faq { border-bottom: 1px solid var(--line); }
+.qa { border-top: 1px solid var(--line); scroll-margin-top: 24px; }
+.qa summary { display: grid; grid-template-columns: minmax(0, 1fr) 28px; align-items: center; gap: 16px; padding: 22px 0; cursor: pointer; list-style: none; }
+.qa summary::-webkit-details-marker { display: none; }
+.qa summary::after {
+  content: ""; width: 28px; height: 28px; border-radius: 50%;
+  box-shadow: inset 0 0 0 1px var(--line);
+  background: linear-gradient(var(--jade-hi), var(--jade-hi)) center / 11px 1.5px no-repeat, linear-gradient(var(--jade-hi), var(--jade-hi)) center / 1.5px 11px no-repeat;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.qa[open] summary::after { transform: rotate(45deg); box-shadow: inset 0 0 0 1px rgba(169, 232, 207, .4); }
+.qa summary:hover h3 { color: var(--pale); }
+.qa summary:focus-visible { outline: 2px solid var(--jade-hi); outline-offset: 4px; border-radius: 8px; }
+.qa p { margin: -6px 44px 24px 0; }
 
 /* ---------- Guide page ---------- */
 
@@ -252,7 +253,7 @@ h2 {
 .prose li::marker { color: var(--jade-hi); }
 .prose strong { color: var(--mist); font-weight: 600; }
 .prose code { padding: .1em .4em; border-radius: 6px; background: rgba(169, 232, 207, .08); color: var(--pale); font-size: .9em; }
-:lang(zh-Hant-HK) .prose p, :lang(zh-Hant-HK) .prose li, :lang(zh-Hant-HK) .read p, :lang(zh-Hant-HK) .read dd { line-height: 1.85; }
+:lang(zh-Hant-HK) .prose p, :lang(zh-Hant-HK) .prose li, :lang(zh-Hant-HK) .read p { line-height: 1.85; }
 
 .table-wrap { overflow-x: auto; border-radius: 18px; box-shadow: inset 0 0 0 1px var(--line); }
 .prose table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: .9375rem; }
