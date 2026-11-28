@@ -98,6 +98,7 @@ const assets = {
   'asset.three': asset('three.min.js'),
   'asset.field': asset('field.js'),
   'asset.consult': asset('consult.js'),
+  'asset.orbit': asset('orbit.js'),
 };
 
 const partials = {
@@ -113,6 +114,7 @@ const PAGES = {
     path: (L) => L.path,
     sources: (id) => ['src/template.html', 'src/i18n.mjs', 'src/partials'],
     ogType: 'website',
+    tab: (L) => L['nav.home'],
     title: (L) => L['meta.title'],
     description: (L) => L['meta.description'],
   },
@@ -121,6 +123,7 @@ const PAGES = {
     path: (L) => L.path + L['guide.slug'],
     sources: (id) => ['src/guide.html', `src/content/guide.${id}.html`, 'src/i18n.mjs', 'src/partials'],
     ogType: 'article',
+    tab: (L) => L['nav.guide'],
     title: (L) => L['guide.metaTitle'],
     description: (L) => L['guide.metaDescription'],
   },
@@ -344,6 +347,8 @@ for (const key of pageKeys) {
       home: L.path,
       guideHref: PAGES.guide.path(L),
       guideCurrent: key === 'guide' ? ' aria-current="page"' : '',
+      // Browser tab: "<page> | Fostier Index". The descriptive title stays in og:title and the JSON-LD.
+      tabTitle: `${PAGES[key].tab(L)} | Fostier Index`,
       pageTitle: PAGES[key].title(L),
       pageDescription: PAGES[key].description(L),
       ogType: PAGES[key].ogType,
